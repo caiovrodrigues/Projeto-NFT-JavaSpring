@@ -1,0 +1,9 @@
+2023-09-22 10:04:57 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "[*]TB_NFT"; expected "TRUNCATE"; SQL statement:
+TB_NFT [42001-214]
+2023-09-22 10:04:58 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "[*]TB_NFT"; expected "TRUNCATE"; SQL statement:
+TB_NFT [42001-214]
+2023-09-22 10:04:59 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "[*]TB_NFT"; expected "TRUNCATE"; SQL statement:
+TB_NFT [42001-214]
