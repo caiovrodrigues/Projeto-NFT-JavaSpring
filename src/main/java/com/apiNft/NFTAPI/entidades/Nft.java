@@ -18,12 +18,10 @@ public class Nft {
     private Integer qtd;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "fk_comment_id", referencedColumnName = "id")
+    @JoinColumn(name = "nft_id", referencedColumnName = "id")
     private List<Comment> comment;
 
-    public Nft(){
-
-    }
+    public Nft(){}
 
     public Long getId() {
         return id;

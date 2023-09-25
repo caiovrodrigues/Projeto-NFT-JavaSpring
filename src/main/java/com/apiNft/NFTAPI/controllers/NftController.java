@@ -9,8 +9,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(value = "http://localhost:4200")
 @RestController
-@RequestMapping("/nfts")
+@RequestMapping("/nft")
 public class NftController {
 
     @Autowired
@@ -22,6 +23,11 @@ public class NftController {
     @GetMapping
     public List<Nft> findAll(){
         return nftRepository.findAll();
+    }
+
+    @GetMapping("/{id}")
+    public Nft findById(@PathVariable Long id){
+        return nftRepository.findById(id).get();
     }
 
     @PostMapping
@@ -36,5 +42,10 @@ public class NftController {
         nft.setComment((List<Comment>) comment);
         commentRepository.saveAll(comment);
         return "Deu certo";
+    }
+
+    @DeleteMapping
+    public void delete(@RequestBody Nft nft){
+        nftRepository.delete(nft);
     }
 }
