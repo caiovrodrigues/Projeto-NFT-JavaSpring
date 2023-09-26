@@ -24,9 +24,8 @@ public class CommentController {
         return commentRepository.findAll();
     }
 
-    @PostMapping()
-    public String inserirComentario(@RequestBody Comment comment){
-        commentRepository.save(comment);
-        return "Deu certo";
+    @PostMapping("/enviar/{id}")
+    public Comment inserir(@PathVariable Long id, @RequestBody Comment comentario){
+
     }
 }

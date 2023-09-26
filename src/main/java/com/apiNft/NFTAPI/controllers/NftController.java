@@ -30,10 +30,23 @@ public class NftController {
         return nftRepository.findById(id).get();
     }
 
+    @PutMapping("/atualizar/{id}")
+    public Nft replaceNft(@PathVariable Long id, @RequestBody Nft nft){
+        return nftRepository.findById(id).map(campo -> {
+            campo.setName(nft.getName());
+            campo.setDescription(nft.getDescription());
+            campo.setPrice(nft.getPrice());
+            campo.setQtd(nft.getQtd());
+            return nftRepository.save(campo);
+        }).orElseGet(() -> {
+            return nftRepository.save(nft);
+        });
+    }
+
     @PostMapping
-    public String inserirNft(@RequestBody Nft nft){
+    public void inserirNft(@RequestBody Nft nft){
+        var user = nft;
         nftRepository.save(nft);
-        return "Deu certo";
     }
 
     @PostMapping("/{id}")
