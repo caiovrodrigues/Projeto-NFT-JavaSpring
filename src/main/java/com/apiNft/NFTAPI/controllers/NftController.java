@@ -50,11 +50,15 @@ public class NftController {
     }
 
     @PostMapping("/{id}")
-    public String inserirComentario(@PathVariable Long id, @RequestBody List<Comment> comment){
+    public void inserirComentario(@PathVariable Long id, @RequestBody List<Comment> comment){
         Nft nft = nftRepository.getReferenceById(id);
         nft.setComment((List<Comment>) comment);
         commentRepository.saveAll(comment);
-        return "Deu certo";
+    }
+
+    @GetMapping("comments/{id}")
+    public List<Comment> pegarComentarios(@PathVariable Long id){
+        return nftRepository.getReferenceById(id).getComment();
     }
 
     @DeleteMapping

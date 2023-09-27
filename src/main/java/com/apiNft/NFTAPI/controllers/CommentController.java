@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(value = "http://localhost:4200")
 @RestController
 @RequestMapping("/comments")
 public class CommentController {
@@ -25,7 +26,8 @@ public class CommentController {
     }
 
     @PostMapping("/enviar/{id}")
-    public Comment inserir(@PathVariable Long id, @RequestBody Comment comentario){
-
+    public String inserir(@PathVariable Long id, @RequestBody Comment comentario){
+        commentRepository.save(comentario);
+        return "Recebemos sua tentativa de adicionar um comentário";
     }
 }
