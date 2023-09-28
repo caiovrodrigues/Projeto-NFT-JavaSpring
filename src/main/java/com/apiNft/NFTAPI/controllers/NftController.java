@@ -38,15 +38,17 @@ public class NftController {
 
     @PostMapping //Cria um nft
     public void inserirNft(@RequestBody Nft nft){
-        var user = nft;
-        nftRepository.save(nft);
+        Nft newNft = new Nft(nft.getName(), nft.getDescription(), nft.getPrice(), nft.getQtd(), nft.getImg_url());
+        nftRepository.save(newNft);
     }
 
     @PostMapping("/{id}") //Cria um comentário em um nft
-    public void inserirComentario(@PathVariable Long id, @RequestBody List<Comment> comment){
+    public void inserirComentario(@PathVariable Long id, @RequestBody Comment comment){
         Nft nft = nftRepository.getReferenceById(id);
-        nft.setComment((List<Comment>) comment);
-        commentRepository.saveAll(comment);
+
+        var comentario = new Comment(nft, comment.getUsuario(), comment.getComentario());
+
+        commentRepository.save(comentario);
     }
 
     @PutMapping("/atualizar/{id}") //Atualiza um nft
