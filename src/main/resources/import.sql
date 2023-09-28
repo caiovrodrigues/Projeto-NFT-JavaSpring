@@ -1,7 +1,4 @@
-INSERT INTO tb_nft(name, description, price, qtd) VALUES ('NFT 1', 'Descrição 1', 999.99, 3);
-INSERT INTO tb_nft(name, description, price, qtd) VALUES ('NFT 2', 'Descrição 2', 4.99, 100);
-INSERT INTO tb_nft(name, description, price, qtd) VALUES ('NFT 3', 'Descrição 3', 2.99, 50);
-INSERT INTO tb_nft(name, description, price, qtd) VALUES ('NFT 4', 'Descrição 4', 5.99, 30);
-
-INSERT INTO tb_comment(usuario, comentario) VALUES ('Caio', 'Não gostei');
-INSERT INTO tb_comment(usuario, comentario) VALUES ('Lara', 'Gostei');
+INSERT INTO tb_nft(name, description, price, qtd, img_url) VALUES ('Voyage', 'Esta obra digital é uma jornada épica através das eras, capturando momentos históricos e revivendo-os de maneira única.', 999.99, 3, 'https://i.pinimg.com/564x/13/87/9f/13879f7eb9bf791d3e93e95b15b63d1f.jpg');
+INSERT INTO tb_nft(name, description, price, qtd, img_url) VALUES ('Mystic', 'Entre em um mundo misterioso e mágico com este NFT. O portal místico convida você a atravessar para um reino de maravilhas inexplicáveis.', 199.99, 100, 'https://i.pinimg.com/564x/9f/75/6b/9f756bda837c6dd3e52b0c44457a156c.jpg');
+INSERT INTO tb_nft(name, description, price, qtd, img_url) VALUES ('Cyber Scape', 'Esta obra leva você a um mundo de sonhos cibernéticos, onde a realidade se funde com o virtual.', 87.99, 50, 'https://i.pinimg.com/736x/43/93/f1/4393f17c4ab076230300e7ee6cf872ee.jpg');
+INSERT INTO tb_nft(name, description, price, qtd, img_url) VALUES ('Symphony', 'Deixe-se levar pela harmonia cósmica deste NFT. Cada elemento desta obra representa uma sinfonia celeste única, onde as estrelas dançam em perfeita sintonia. Uma experiência transcendental aguarda.', 1499.99, 30, 'https://i.pinimg.com/564x/a7/80/a8/a780a85d53165e81dffe48d558721679.jpg');

@@ -20,12 +20,12 @@ public class CommentController {
     @Autowired
     private NftRepository nftRepository;
 
-    @GetMapping
+    @GetMapping //Retorna todos os comentários
     public List<Comment> findALl(){
         return commentRepository.findAll();
     }
 
-    @PostMapping("/enviar/{id}")
+    @PostMapping("/enviar/{id}") //Salva um comentário (Não está sendo utilizado)
     public String inserir(@PathVariable Long id, @RequestBody Comment comentario){
         commentRepository.save(comentario);
         return "Recebemos sua tentativa de adicionar um comentário";

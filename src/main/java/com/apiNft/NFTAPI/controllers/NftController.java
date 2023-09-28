@@ -20,17 +20,36 @@ public class NftController {
     @Autowired
     private CommentRepository commentRepository;
 
-    @GetMapping
+
+    @GetMapping //Retorna todos os nfts
     public List<Nft> findAll(){
         return nftRepository.findAll();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{id}") //Retorna um nft
     public Nft findById(@PathVariable Long id){
         return nftRepository.findById(id).get();
     }
 
-    @PutMapping("/atualizar/{id}")
+    @GetMapping("comments/{id}") //Retorna todos os comentários de um nft
+    public List<Comment> pegarComentarios(@PathVariable Long id){
+        return nftRepository.getReferenceById(id).getComment();
+    }
+
+    @PostMapping //Cria um nft
+    public void inserirNft(@RequestBody Nft nft){
+        var user = nft;
+        nftRepository.save(nft);
+    }
+
+    @PostMapping("/{id}") //Cria um comentário em um nft
+    public void inserirComentario(@PathVariable Long id, @RequestBody List<Comment> comment){
+        Nft nft = nftRepository.getReferenceById(id);
+        nft.setComment((List<Comment>) comment);
+        commentRepository.saveAll(comment);
+    }
+
+    @PutMapping("/atualizar/{id}") //Atualiza um nft
     public Nft replaceNft(@PathVariable Long id, @RequestBody Nft nft){
         return nftRepository.findById(id).map(campo -> {
             campo.setName(nft.getName());
@@ -43,25 +62,7 @@ public class NftController {
         });
     }
 
-    @PostMapping
-    public void inserirNft(@RequestBody Nft nft){
-        var user = nft;
-        nftRepository.save(nft);
-    }
-
-    @PostMapping("/{id}")
-    public void inserirComentario(@PathVariable Long id, @RequestBody List<Comment> comment){
-        Nft nft = nftRepository.getReferenceById(id);
-        nft.setComment((List<Comment>) comment);
-        commentRepository.saveAll(comment);
-    }
-
-    @GetMapping("comments/{id}")
-    public List<Comment> pegarComentarios(@PathVariable Long id){
-        return nftRepository.getReferenceById(id).getComment();
-    }
-
-    @DeleteMapping
+    @DeleteMapping //Deleta um nft
     public void delete(@RequestBody Nft nft){
         nftRepository.delete(nft);
     }

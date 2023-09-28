@@ -16,6 +16,7 @@ public class Nft {
     private String description;
     private Float price;
     private Integer qtd;
+    private String img_url;
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "nft_id", referencedColumnName = "id")
@@ -61,6 +62,14 @@ public class Nft {
 
     public void setQtd(Integer qtd) {
         this.qtd = qtd;
+    }
+
+    public String getImg_url() {
+        return img_url;
+    }
+
+    public void setImg_url(String img_url) {
+        this.img_url = img_url;
     }
 
     public List<Comment> getComment() {

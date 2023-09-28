@@ -13,6 +13,7 @@ public class Comment {
     private String usuario;
     private String comentario;
 
+
     public Comment(){}
 
     public Long getId() {
