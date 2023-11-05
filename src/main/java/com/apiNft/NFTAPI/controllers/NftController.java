@@ -2,8 +2,10 @@ package com.apiNft.NFTAPI.controllers;
 
 import com.apiNft.NFTAPI.Repositories.CommentRepository;
 import com.apiNft.NFTAPI.Repositories.NftRepository;
+import com.apiNft.NFTAPI.dto.DadosCadastroNft;
 import com.apiNft.NFTAPI.entidades.Comment;
 import com.apiNft.NFTAPI.entidades.Nft;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,7 +21,6 @@ public class NftController {
 
     @Autowired
     private CommentRepository commentRepository;
-
 
     @GetMapping //Retorna todos os nfts
     public List<Nft> findAll(){
@@ -37,9 +38,8 @@ public class NftController {
     }
 
     @PostMapping //Cria um nft
-    public void inserirNft(@RequestBody Nft nft){
-        Nft newNft = new Nft(nft.getName(), nft.getDescription(), nft.getPrice(), nft.getQtd(), nft.getImg_url());
-        nftRepository.save(newNft);
+    public void inserirNft(@RequestBody @Valid DadosCadastroNft nft){
+        nftRepository.save(new Nft(nft));
     }
 
     @PostMapping("/{id}") //Cria um comentário em um nft

@@ -16,7 +16,6 @@ public class CommentController {
 
     @Autowired
     private CommentRepository commentRepository;
-
     @Autowired
     private NftRepository nftRepository;
 
