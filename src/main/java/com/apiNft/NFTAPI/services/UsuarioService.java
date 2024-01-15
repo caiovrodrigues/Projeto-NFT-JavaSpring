@@ -7,6 +7,7 @@ import com.apiNft.NFTAPI.dto.ResponseLoginUsuario;
 import com.apiNft.NFTAPI.entidades.Nft;
 import com.apiNft.NFTAPI.entidades.Usuario;
 import jakarta.persistence.EntityNotFoundException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,10 +15,10 @@ import java.util.InputMismatchException;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class UsuarioService {
 
-    @Autowired
-    private UsuarioRepository repository;
+    private final UsuarioRepository repository;
 
     public Usuario getUser(Long id) {
         return repository.findById(id).orElseThrow(() -> new EntityNotFoundException("Usuário com o id: " + id + " não encontrado."));

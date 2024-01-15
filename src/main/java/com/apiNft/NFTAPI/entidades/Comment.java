@@ -20,19 +20,22 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private LocalDateTime date;
+    private String mensagem;
 
-    private String usuario;
-    private String comentario;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    @JsonIgnore
+    private Usuario usuario;
 
     @ManyToOne
     @JoinColumn(name = "nft_id")
     @JsonIgnore
     private Nft nft;
 
-    public Comment(Nft nft, String usuario, String comentario){
+    public Comment(Usuario usuario, Nft nft, String mensagem){
         this.date = LocalDateTime.now();
-        this.nft = nft;
         this.usuario = usuario;
-        this.comentario = comentario;
+        this.nft = nft;
+        this.mensagem = mensagem;
     }
 }

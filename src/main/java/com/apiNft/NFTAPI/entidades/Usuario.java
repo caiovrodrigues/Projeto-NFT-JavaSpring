@@ -25,8 +25,10 @@ public class Usuario {
     private String password;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    @JsonIgnore
     private List<Nft> nfts;
+
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    private List<Comment> comments;
 
     public Usuario(RequestCadastroUsuario usuario) {
         this.email = usuario.email();

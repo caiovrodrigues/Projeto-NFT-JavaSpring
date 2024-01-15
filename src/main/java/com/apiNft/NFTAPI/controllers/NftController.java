@@ -63,16 +63,6 @@ public class NftController {
         return ResponseEntity.ok(newNft);
     }
 
-
-    @PostMapping("/{id}") //Cria um comentário em um nft
-    public void inserirComentario(@PathVariable Long id, @RequestBody Comment comment){
-        Nft nft = nftRepository.getReferenceById(id);
-
-        var comentario = new Comment(nft, comment.getUsuario(), comment.getComentario());
-
-        commentRepository.save(comentario);
-    }
-
     @PutMapping("/atualizar/{id}") //Atualiza um nft
     public Nft replaceNft(@PathVariable Long id, @RequestBody Nft nft){
         return nftRepository.findById(id).map(campo -> {
@@ -94,12 +84,10 @@ public class NftController {
     @GetMapping("/canedit/nft/{idNft}/usuario/{idUser}")
     public LogadoDTO verificaAuth(@PathVariable Long idNft, @PathVariable Long idUser){
         Nft nft = this.nftService.getById(idNft);
-        Usuario usuario = this.usuarioService.getUser(idUser);
-        if(nft.getUser().equals(usuario)){
+        if(nft.getUser().getId().equals(idUser)){
             return new LogadoDTO(true);
-        }else{
-            return new LogadoDTO(false);
         }
+        return new LogadoDTO(false);
     }
 
     public record LogadoDTO(boolean logado){}

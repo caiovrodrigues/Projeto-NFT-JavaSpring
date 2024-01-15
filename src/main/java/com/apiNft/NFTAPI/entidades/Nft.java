@@ -14,6 +14,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Entity(name = "nft")
@@ -36,6 +37,7 @@ public class Nft {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @JsonIgnore
     private Usuario user;
 
     @OneToMany(mappedBy = "nft", cascade = CascadeType.ALL)
