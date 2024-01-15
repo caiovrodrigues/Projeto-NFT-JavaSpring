@@ -1,9 +1,10 @@
 package com.apiNft.NFTAPI.dto;
 
+import com.apiNft.NFTAPI.entidades.Usuario;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
-public record DadosCadastroNft(
+public record RequestCadastroNft(
         @NotBlank(message = "Nome é obrigatório")
         String name,
         @NotBlank
@@ -13,6 +14,8 @@ public record DadosCadastroNft(
         @NotNull
         Integer qtd,
         @NotBlank
-        String img_url
-        ) {
+        String img_url,
+        @NotBlank
+        Usuario usuario
+        ){
 }
