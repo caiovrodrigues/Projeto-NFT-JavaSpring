@@ -41,6 +41,7 @@ public class Nft {
     private Usuario user;
 
     @OneToMany(mappedBy = "nft", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Comment> comment;
 
     public Nft(RequestCadastroNft nft, Usuario usuario) {

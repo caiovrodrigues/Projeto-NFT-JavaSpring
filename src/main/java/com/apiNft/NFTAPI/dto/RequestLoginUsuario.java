@@ -1,4 +1,6 @@
 package com.apiNft.NFTAPI.dto;
 
-public record RequestLoginUsuario(String username, String password) {
+import jakarta.validation.constraints.NotBlank;
+
+public record RequestLoginUsuario(@NotBlank String username, @NotBlank String password) {
 }

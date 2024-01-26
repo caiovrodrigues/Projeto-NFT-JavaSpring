@@ -1,4 +1,4 @@
 package com.apiNft.NFTAPI.dto;
 
-public record ResponseLoginUsuario(String token) {
+public record ResponseLoginUsuario(Long id, String name) {
 }

@@ -10,6 +10,7 @@ import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.InputMismatchException;
 import java.util.List;
@@ -29,6 +30,7 @@ public class UsuarioService {
         return usuario.getNfts();
     }
 
+    @Transactional
     public Usuario postUser(RequestCadastroUsuario usuario) {
         if(!usuario.senha().equals(usuario.confirmaSenha())){
             throw new InputMismatchException("Senha e confirma senha não conferem");
@@ -36,9 +38,13 @@ public class UsuarioService {
         return repository.save(new Usuario(usuario));
     }
 
-    public ResponseLoginUsuario logarUser(RequestLoginUsuario usuario) {
-        Usuario user = repository.findByUsername(usuario.username()).orElseThrow(() -> new EntityNotFoundException("O usuário não existe"));
+    @Transactional(readOnly = true)
+    public ResponseLoginUsuario logarUser(RequestLoginUsuario dados) {
+        Usuario user = repository.findByUsername(dados.username()).orElseThrow(() -> new EntityNotFoundException("O usuário não existe"));
+        if(!user.getPassword().equals(dados.password())){
+            throw new InputMismatchException("A senha está incorreta");
+        }
         System.out.println(user.toString());
-        return new ResponseLoginUsuario(user.getId().toString());
+        return new ResponseLoginUsuario(user.getId(), user.getUsername());
     }
 }

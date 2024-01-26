@@ -2,6 +2,7 @@ package com.apiNft.NFTAPI.services;
 
 import com.apiNft.NFTAPI.Repositories.NftRepository;
 import com.apiNft.NFTAPI.dto.RequestCadastroNft;
+import com.apiNft.NFTAPI.dto.ResponseNftDTO;
 import com.apiNft.NFTAPI.entidades.Nft;
 import com.apiNft.NFTAPI.entidades.Usuario;
 import jakarta.persistence.EntityNotFoundException;
@@ -37,5 +38,10 @@ public class NftService {
         var newNft = new Nft(nft, usuario);
 
         return repository.save(newNft);
+    }
+
+    public void delete(Long id) {
+        getById(id);
+        this.repository.deleteById(id);
     }
 }

@@ -44,9 +44,9 @@ public class UsuarioController {
         return ResponseEntity.created(uri).body(new ResponseCadastroUsuario(newUser));
     }
 
-    @PostMapping
-    public ResponseEntity logarUser(@RequestBody @Valid RequestLoginUsuario usuario){
-        ResponseLoginUsuario token = usuarioService.logarUser(usuario);
+    @PostMapping("/auth")
+    public ResponseEntity logarUser(@RequestBody @Valid RequestLoginUsuario dadosLogin){
+        ResponseLoginUsuario token = usuarioService.logarUser(dadosLogin);
         return ResponseEntity.ok(token);
     }
 

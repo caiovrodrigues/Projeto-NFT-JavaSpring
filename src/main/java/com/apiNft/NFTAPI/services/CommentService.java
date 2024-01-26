@@ -18,13 +18,22 @@ public class CommentService {
 
     private final CommentRepository repository;
 
+    public List<Comment> findAll() {
+        return repository.findAll();
+    }
     @Transactional
     public Comment postComentario(Usuario usuario, Nft nft, RequestCommentDTO comentario){
         Comment newComentario = new Comment(usuario, nft, comentario.mensagem());
         return repository.save(newComentario);
     }
 
-    public List<Comment> findAll() {
-        return repository.findAll();
+    @Transactional(readOnly = true)
+    public Comment getComentario(Long id){
+        return this.repository.findById(id).orElseThrow(() -> new RuntimeException("Comentário com o id " + id + " não encontrado."));
+    }
+
+    @Transactional
+    public void delete(Long id){
+        this.repository.deleteById(id);
     }
 }
