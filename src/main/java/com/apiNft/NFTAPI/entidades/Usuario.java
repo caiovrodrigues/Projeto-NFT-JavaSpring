@@ -15,6 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
+@EqualsAndHashCode(of = {"id"})
 public class Usuario {
 
     @Id
