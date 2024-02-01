@@ -8,7 +8,7 @@ import lombok.*;
 
 import java.util.List;
 
-@Table(name = "tb_usuarios")
+@Table(name = "tb_usuario")
 @Entity
 @Getter
 @Setter
