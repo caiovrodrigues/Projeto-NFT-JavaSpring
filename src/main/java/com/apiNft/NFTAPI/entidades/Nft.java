@@ -36,6 +36,7 @@ public class Nft {
     private String img_url;
 
     @CreationTimestamp
+    @Column(name = "data_criacao")
     private LocalDateTime date;
 
     @ManyToOne
