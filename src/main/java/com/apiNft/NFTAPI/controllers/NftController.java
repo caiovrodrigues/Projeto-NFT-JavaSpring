@@ -19,7 +19,12 @@ import org.springframework.jdbc.core.RowCallbackHandler;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.List;
 
 @CrossOrigin(value = "http://localhost:4200")
@@ -54,6 +59,16 @@ public class NftController {
     public ResponseEntity<Nft> postNft(@PathVariable Long id, @RequestBody RequestCadastroNft nft){
         Nft newNft = nftService.postNft(id, nft);
         return ResponseEntity.ok(newNft);
+    }
+
+    @PostMapping("/uploadphoto")
+    public ResponseEntity uploadPhoto(@RequestParam MultipartFile file) throws IOException {
+        String path = String.format("C:\\Users\\caiob\\Documents\\Ciência da Computação\\Projeto - beNFT\\Projeto-NFT-JavaSpring\\assets\\%s", file.getOriginalFilename());
+
+        byte[] inputStream = file.getBytes();
+
+        Files.write(Path.of(path), inputStream);
+        return ResponseEntity.ok("Será se salvou? " + path);
     }
 
     @PutMapping("/atualizar/{id}") //Atualiza um nft
