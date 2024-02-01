@@ -23,6 +23,7 @@ public class Comment {
     private String mensagem;
 
     @CreationTimestamp
+    @Column(name = "data_criacao")
     private LocalDateTime date;
 
     @ManyToOne
