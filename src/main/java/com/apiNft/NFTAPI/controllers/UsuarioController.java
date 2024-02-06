@@ -27,8 +27,7 @@ public class UsuarioController {
 
     @GetMapping("/{id}")
     public Usuario getUser(@PathVariable Long id){
-        Usuario user = usuarioService.getUser(id);
-        return user;
+        return usuarioService.getUser(id);
     }
 
     @GetMapping("/nfts/{id}")
@@ -49,7 +48,5 @@ public class UsuarioController {
         ResponseLoginUsuario token = usuarioService.logarUser(dadosLogin);
         return ResponseEntity.ok(token);
     }
-
-
 
 }
