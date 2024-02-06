@@ -19,12 +19,16 @@ public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+<<<<<<< HEAD
+<<<<<<< HEAD
     private String mensagem;
 
     @CreationTimestamp
     @Column(name = "data_criacao")
-
+=======
+>>>>>>> parent of 034e479 (Nome de classes alteradas)
+=======
+>>>>>>> parent of 034e479 (Nome de classes alteradas)
     private LocalDateTime date;
     private String mensagem;
 
