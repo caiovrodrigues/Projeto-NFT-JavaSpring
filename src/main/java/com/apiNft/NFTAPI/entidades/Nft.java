@@ -36,13 +36,10 @@ public class Nft {
     private String img_url;
 
 <<<<<<< HEAD
-<<<<<<< HEAD
     @CreationTimestamp
     @Column(name = "data_criacao")
     private LocalDateTime date;
 
-=======
->>>>>>> parent of 034e479 (Nome de classes alteradas)
 =======
 >>>>>>> parent of 034e479 (Nome de classes alteradas)
     @ManyToOne
