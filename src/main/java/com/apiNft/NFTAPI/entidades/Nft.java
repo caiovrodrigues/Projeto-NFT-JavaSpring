@@ -12,7 +12,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -29,16 +28,20 @@ public class Nft {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private LocalDateTime date;
     private String name;
     private String description;
     private Float price;
     private Integer qtd;
     private String img_url;
 
+<<<<<<< HEAD
     @CreationTimestamp
     @Column(name = "data_criacao")
     private LocalDateTime date;
 
+=======
+>>>>>>> parent of 034e479 (Nome de classes alteradas)
     @ManyToOne
     @JoinColumn(name = "user_id")
     @JsonIgnore
@@ -49,6 +52,7 @@ public class Nft {
     private List<Comment> comment;
 
     public Nft(RequestCadastroNft nft, Usuario usuario) {
+        this.date = LocalDateTime.now();
         this.name = nft.name();
         this.description = nft.description();
         this.price = nft.price();

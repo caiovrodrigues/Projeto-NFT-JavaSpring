@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -20,11 +19,15 @@ public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+<<<<<<< HEAD
     private String mensagem;
 
     @CreationTimestamp
     @Column(name = "data_criacao")
+=======
+>>>>>>> parent of 034e479 (Nome de classes alteradas)
     private LocalDateTime date;
+    private String mensagem;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -37,6 +40,7 @@ public class Comment {
     private Nft nft;
 
     public Comment(Usuario usuario, Nft nft, String mensagem){
+        this.date = LocalDateTime.now();
         this.usuario = usuario;
         this.nft = nft;
         this.mensagem = mensagem;
