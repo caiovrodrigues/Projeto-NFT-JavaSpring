@@ -2,11 +2,13 @@ package com.apiNft.NFTAPI.services;
 
 import com.apiNft.NFTAPI.Repositories.NftRepository;
 import com.apiNft.NFTAPI.dto.RequestCadastroNft;
-import com.apiNft.NFTAPI.dto.ResponseNftDTO;
 import com.apiNft.NFTAPI.entidades.Nft;
 import com.apiNft.NFTAPI.entidades.Usuario;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,8 +24,8 @@ public class NftService {
     private UsuarioService usuarioService;
 
     @Transactional(readOnly = true)
-    public List<Nft> getAll(){
-        return repository.findAll();
+    public Page<Nft> getAll(Pageable pageable){
+        return repository.findAll(pageable);
     }
 
     @Transactional(readOnly = true)
