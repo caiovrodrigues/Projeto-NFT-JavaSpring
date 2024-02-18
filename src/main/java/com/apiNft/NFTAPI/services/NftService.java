@@ -4,7 +4,9 @@ import com.apiNft.NFTAPI.Repositories.NftRepository;
 import com.apiNft.NFTAPI.dto.RequestCadastroNft;
 import com.apiNft.NFTAPI.entidades.Nft;
 import com.apiNft.NFTAPI.entidades.Usuario;
+import com.apiNft.NFTAPI.infra.security.JwtService;
 import jakarta.persistence.EntityNotFoundException;
+import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties;
 import org.springframework.data.domain.Page;
@@ -23,6 +25,9 @@ public class NftService {
     @Autowired
     private UsuarioService usuarioService;
 
+    @Autowired
+    private JwtService jwtService;
+
     @Transactional(readOnly = true)
     public Page<Nft> getAll(Pageable pageable){
         return repository.findAll(pageable);
@@ -34,11 +39,11 @@ public class NftService {
     }
 
     @Transactional
-    public Nft postNft(Long id, RequestCadastroNft nft) {
-        Usuario usuario = usuarioService.getUser(id);
+    public Nft postNft(RequestCadastroNft nft, String token) {
+        String username = jwtService.validateToken(token.substring(7));
+        Usuario usuario = usuarioService.findByUsername(username);
 
-        var newNft = new Nft(nft, usuario);
-
+        Nft newNft = new Nft(nft, usuario);
         return repository.save(newNft);
     }
 

@@ -1,36 +1,36 @@
 package com.apiNft.NFTAPI.controllers;
 
-import com.apiNft.NFTAPI.Repositories.CommentRepository;
 import com.apiNft.NFTAPI.Repositories.NftRepository;
 import com.apiNft.NFTAPI.dto.RequestCadastroNft;
 import com.apiNft.NFTAPI.dto.ResponseNftDTO;
 import com.apiNft.NFTAPI.entidades.Comment;
 import com.apiNft.NFTAPI.entidades.Nft;
+import com.apiNft.NFTAPI.entidades.Usuario;
+import com.apiNft.NFTAPI.infra.security.JwtService;
 import com.apiNft.NFTAPI.services.NftService;
 import com.apiNft.NFTAPI.services.UsuarioService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowCallbackHandler;
-import org.springframework.jdbc.core.RowMapper;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
-@CrossOrigin(value = "http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:4200")
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/nft")
 public class NftController {
 
     private final NftRepository nftRepository;
-
     private final NftService nftService;
+    private final JwtService jwtService;
+    private final UsuarioService usuarioService;
 
     @GetMapping //Retorna todos os nfts
     public ResponseEntity<Page<Nft>> findAll(@PageableDefault(size = 9) Pageable pageable){
@@ -44,16 +44,16 @@ public class NftController {
         return ResponseEntity.ok(new ResponseNftDTO(nft));
     }
 
-    @GetMapping("comments/{id}") //Retorna todos os comentários de um nft
+    @GetMapping("/{id}/comments") //Retorna todos os comentários de um nft
     public List<Comment> pegarComentarios(@PathVariable Long id){
         return nftRepository.getReferenceById(id).getComment();
     }
 
-    @Transactional
-    @PostMapping("/usuario/{id}")
-    public ResponseEntity<Nft> postNft(@PathVariable Long id, @RequestBody RequestCadastroNft nft){
-        Nft newNft = nftService.postNft(id, nft);
-        return ResponseEntity.ok(newNft);
+    @PostMapping
+    public ResponseEntity<Nft> postNft(@RequestHeader(name = "Authorization") String token, @RequestBody @Valid RequestCadastroNft nft){
+        Nft newNft = nftService.postNft(nft, token);
+        URI uri = UriComponentsBuilder.fromPath("api/nft/{id}").buildAndExpand(newNft.getId()).toUri();
+        return ResponseEntity.created(uri).body(newNft);
     }
 
     @PutMapping("/atualizar/{id}") //Atualiza um nft
@@ -72,10 +72,14 @@ public class NftController {
         nftService.delete(id);
     }
 
-    @GetMapping("/canedit/nft/{idNft}/usuario/{idUser}")
-    public LogadoDTO verificaAuth(@PathVariable Long idNft, @PathVariable Long idUser){
+    @GetMapping("/{idNft}/canedit")
+    public LogadoDTO verificaAuth(@RequestHeader(name = "Authorization") String token, @PathVariable Long idNft){
+        String username = jwtService.validateToken(token.substring(7));
+        Usuario usuario = usuarioService.findByUsername(username);
+
         Nft nft = this.nftService.getById(idNft);
-        if(nft.getUser().getId().equals(idUser)){
+        System.out.println("NFT: " + nft);
+        if(nft.getUser().equals(usuario)){
             return new LogadoDTO(true);
         }
         return new LogadoDTO(false);

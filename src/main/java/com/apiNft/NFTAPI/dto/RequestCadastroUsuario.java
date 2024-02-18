@@ -2,15 +2,19 @@ package com.apiNft.NFTAPI.dto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import lombok.Getter;
+import lombok.Setter;
 
-public record RequestCadastroUsuario(
+@Getter
+@Setter
+public class RequestCadastroUsuario{
         @NotBlank
         @Email(message = "O email deve ser válido")
-        String email,
+        private String email;
         @NotBlank(message = "username não deve estar em branco")
-        String username,
+        private String username;
         @NotBlank(message = "senha não deve estar em branco")
-        String senha,
+        private String password;
         @NotBlank(message = "confirma senha não deve estar em branco")
-        String confirmaSenha) {
+        private String confirmPassword;
 }

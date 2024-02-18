@@ -23,8 +23,7 @@ public class CommentService {
     }
     @Transactional
     public Comment postComentario(Usuario usuario, Nft nft, RequestCommentDTO comentario){
-        Comment newComentario = new Comment(usuario, nft, comentario.mensagem());
-        return repository.save(newComentario);
+        return repository.save(new Comment(usuario, nft, comentario.mensagem()));
     }
 
     @Transactional(readOnly = true)

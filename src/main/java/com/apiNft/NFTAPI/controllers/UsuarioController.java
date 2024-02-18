@@ -16,8 +16,9 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Map;
 
-@CrossOrigin("http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping(value = "/api/users")
 public class UsuarioController {
@@ -37,19 +38,17 @@ public class UsuarioController {
         return ResponseEntity.ok(nfts);
     }
 
-    @PostMapping("/criar")
+    @PostMapping("/login")
+    public ResponseEntity logarUser(@RequestBody @Valid RequestLoginUsuario dadosLogin){
+        var token = usuarioService.logarUsuario(dadosLogin);
+        return ResponseEntity.ok(Map.of("token", token));
+    }
+
+    @PostMapping("/register")
     public ResponseEntity<ResponseCadastroUsuario> postUser(@RequestBody @Valid RequestCadastroUsuario usuario, UriComponentsBuilder uriBuilder){
-        Usuario newUser = usuarioService.postUser(usuario);
+        Usuario newUser = usuarioService.cadastraUsuario(usuario);
         URI uri = uriBuilder.path("/users/{id}").buildAndExpand(newUser.getId()).toUri();
         return ResponseEntity.created(uri).body(new ResponseCadastroUsuario(newUser));
     }
-
-    @PostMapping("/auth")
-    public ResponseEntity logarUser(@RequestBody @Valid RequestLoginUsuario dadosLogin){
-        ResponseLoginUsuario token = usuarioService.logarUser(dadosLogin);
-        return ResponseEntity.ok(token);
-    }
-
-
 
 }

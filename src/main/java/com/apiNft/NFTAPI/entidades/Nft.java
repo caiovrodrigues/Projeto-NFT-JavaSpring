@@ -13,6 +13,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.SourceType;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -36,7 +38,10 @@ public class Nft {
     private String img_url;
 
     @CreationTimestamp
-    private LocalDateTime date;
+    private LocalDateTime created_at;
+
+    @UpdateTimestamp
+    private LocalDateTime update_at;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
