@@ -17,7 +17,6 @@ import java.time.LocalDateTime;
 import java.util.InputMismatchException;
 import java.util.List;
 
-@CrossOrigin(value = "http://localhost:4200")
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/comments")

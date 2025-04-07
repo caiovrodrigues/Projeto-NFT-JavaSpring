@@ -1,0 +1,53 @@
+version: '1.0'
+
+networks:
+  backend:
+    driver: bridge
+
+volumes:
+  nft-data:
+  minio-data:
+
+services:
+  db:
+    image: mysql
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+      MYSQL_DATABASE: db_benft
+    networks:
+      - backend
+    volumes:
+      - "nft-data:/var/lib/mysql"
+  web:
+    image: nft-frontend
+    ports:
+      - 4200:4201
+    networks:
+      - backend
+  api:
+    image: nft-backend
+    ports:
+      - 8080:8080
+    depends_on:
+      - db
+    environment:
+      minio-url: http://minio:9000
+      minio-login: minio
+      minio-password: secret123
+    networks:
+      - backend
+  minio:
+    image: bitnami/minio
+    ports:
+      - 9000:9000
+      - 9001:9001
+    environment:
+      MINIO_ROOT_USER: minio
+      MINIO_ROOT_PASSWORD: secret123
+      MINIO_DEFAULT_BUCKETS: nft
+    volumes:
+      - "minio-data:/bitnami/minio/data"
+    networks:
+      - backend

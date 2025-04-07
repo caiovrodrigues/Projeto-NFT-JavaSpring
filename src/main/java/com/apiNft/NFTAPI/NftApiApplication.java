@@ -7,7 +7,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class NftApiApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(NftApiApplication.class, args);
+		SpringApplication springApplication = new SpringApplication(NftApiApplication.class);
+		springApplication.setAdditionalProfiles("dev");
+		springApplication.run();
 	}
-
 }
+
+

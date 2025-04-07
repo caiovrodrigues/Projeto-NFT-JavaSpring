@@ -14,14 +14,16 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 
-@CrossOrigin(origins = "http://localhost:4200")
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/nft")
@@ -32,10 +34,17 @@ public class NftController {
     private final JwtService jwtService;
     private final UsuarioService usuarioService;
 
+    @GetMapping("/teste")
+    public ResponseEntity<Nft> teste(){
+        Optional<Nft> nftOptional = nftRepository.findById(1L);
+        List<Comment> comments = nftOptional.get().getComment();
+        return ResponseEntity.ok(nftOptional.get());
+    }
+
     @GetMapping //Retorna todos os nfts
     public ResponseEntity<Page<Nft>> findAll(@PageableDefault(size = 9) Pageable pageable){
         Page<Nft> nfts = nftService.getAll(pageable);
-        return ResponseEntity.ok(nfts);
+        return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(nfts);
     }
 
     @GetMapping("/{id}") //Retorna um nft
@@ -54,6 +63,13 @@ public class NftController {
         Nft newNft = nftService.postNft(nft, token);
         URI uri = UriComponentsBuilder.fromPath("api/nft/{id}").buildAndExpand(newNft.getId()).toUri();
         return ResponseEntity.created(uri).body(newNft);
+    }
+
+    @PostMapping("/{id}/upload-picture")
+    public void uploadNftPicture(@PathVariable Long id, @RequestPart MultipartFile file){
+        nftService.saveNftPicture(id, file);
+        System.out.println("Picture uploaded!");
+        System.out.println(file);
     }
 
     @PutMapping("/atualizar/{id}") //Atualiza um nft

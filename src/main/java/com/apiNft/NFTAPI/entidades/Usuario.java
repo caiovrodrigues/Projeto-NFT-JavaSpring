@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.*;
 
+@Builder
 @Table(name = "tb_usuarios")
 @Entity
 @Getter
@@ -29,6 +30,7 @@ public class Usuario implements UserDetails {
     @Column(unique = true)
     private String username;
 
+    @Column(name = "password")
     private String password;
 
     @Enumerated(EnumType.STRING)

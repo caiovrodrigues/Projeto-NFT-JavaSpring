@@ -3,18 +3,20 @@ package com.apiNft.NFTAPI.infra.security;
 import com.apiNft.NFTAPI.entidades.Usuario;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Service;
 
 import java.time.*;
-import java.util.stream.Collectors;
 
 @Service
 public class JwtService {
 
-    private final String secretkey = "123456";
+    @Value("{spring.security.secret}")
+    private String secret;
 
     public String generateToken(Usuario usuario){
-        Algorithm algorithm = Algorithm.HMAC256(secretkey);
+        Algorithm algorithm = Algorithm.HMAC256(secret);
         return JWT.create()
                 .withIssuer("api-nft")
                 .withIssuedAt(Instant.now())
@@ -26,7 +28,7 @@ public class JwtService {
     }
 
     public String validateToken(String token){
-        Algorithm algorithm = Algorithm.HMAC256(secretkey);
+        Algorithm algorithm = Algorithm.HMAC256(secret);
         return JWT.require(algorithm)
                 .withIssuer("api-nft")
                 .build()

@@ -10,8 +10,6 @@ public record RequestCadastroNft(
         @NotNull
         Float price,
         @NotNull
-        Integer qtd,
-        @NotBlank
-        String img_url
+        Integer qtd
         ){
 }

@@ -20,7 +20,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-@Entity(name = "nft")
+@Entity
 @Table(name = "tb_nft")
 @Getter
 @Setter
@@ -31,11 +31,16 @@ public class Nft {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String name;
+
     private String description;
+
     private Float price;
+
     private Integer qtd;
-    private String img_url;
+
+    private String urlMinio;
 
     @CreationTimestamp
     private LocalDateTime created_at;
@@ -57,7 +62,6 @@ public class Nft {
         this.description = nft.description();
         this.price = nft.price();
         this.qtd = nft.qtd();
-        this.img_url = nft.img_url();
         this.user = usuario;
     }
 
