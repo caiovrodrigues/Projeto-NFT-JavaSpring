@@ -12,22 +12,21 @@ import java.io.IOException;
 import java.net.URI;
 import java.util.List;
 import java.util.Map;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/users")
 public class UsuarioController {
 
-    @Autowired
-    private UsuarioService usuarioService;
+    private final UsuarioService usuarioService;
 
     @GetMapping("/{id}")
     public Usuario getUser(@PathVariable Long id) {
-        Usuario user = usuarioService.getUser(id);
-        return user;
+        return usuarioService.getUser(id);
     }
 
     @GetMapping("/nfts/{id}")
