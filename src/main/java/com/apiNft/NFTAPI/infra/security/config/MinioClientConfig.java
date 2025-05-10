@@ -16,11 +16,7 @@ public class MinioClientConfig {
     private String password;
 
     @Bean
-    public MinioClient minioClient(){
-        return MinioClient.builder()
-                .endpoint(uri)
-                .credentials(login, password)
-                .build();
+    public MinioClient minioClient() {
+        return MinioClient.builder().endpoint(uri).credentials(login, password).build();
     }
-
 }

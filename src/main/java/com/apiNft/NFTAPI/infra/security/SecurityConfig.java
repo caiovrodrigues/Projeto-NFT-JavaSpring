@@ -29,16 +29,20 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http
-                .csrf(AbstractHttpConfigurer::disable)
+        http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers(HttpMethod.POST,"/api/users/login").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/api/users/register").permitAll()
-                        .requestMatchers(HttpMethod.GET, "api/nft", "api/nft/*", "api/comments/nft/*").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/relatorio").permitAll()
-                        .requestMatchers(PathRequest.toH2Console()).permitAll()
-                        .anyRequest().permitAll()
-                )
+                        .requestMatchers(HttpMethod.POST, "/api/users/login")
+                        .permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/users/register")
+                        .permitAll()
+                        .requestMatchers(HttpMethod.GET, "api/nft", "api/nft/*", "api/comments/nft/*")
+                        .permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/relatorio")
+                        .permitAll()
+                        .requestMatchers(PathRequest.toH2Console())
+                        .permitAll()
+                        .anyRequest()
+                        .permitAll())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
                 .headers(headers -> headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin))
@@ -52,8 +56,7 @@ public class SecurityConfig {
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder(){
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
 }

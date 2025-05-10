@@ -25,12 +25,12 @@ public class NftService {
     private final MinioService minioService;
 
     @Transactional(readOnly = true)
-    public Page<Nft> getAll(Pageable pageable){
+    public Page<Nft> getAll(Pageable pageable) {
         return repository.findAll(pageable);
     }
 
     @Transactional(readOnly = true)
-    public Nft getById(Long id){
+    public Nft getById(Long id) {
         return repository.findById(id).orElseThrow(() -> new EntityNotFoundException("O nft " + id + " não existe"));
     }
 
@@ -44,7 +44,7 @@ public class NftService {
     }
 
     @Transactional
-    public void saveNftPicture(Long id, MultipartFile file){
+    public void saveNftPicture(Long id, MultipartFile file) {
         Nft nft = getById(id);
         StringBuilder urlMinio = new StringBuilder("/").append(nft.getId());
         urlMinio.append("/").append(file.getOriginalFilename());

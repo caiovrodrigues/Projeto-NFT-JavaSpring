@@ -1,4 +1,3 @@
 package com.apiNft.NFTAPI.dto;
 
-public record RequestCommentDTO(String mensagem) {
-}
+public record RequestCommentDTO(String mensagem) {}

@@ -8,15 +8,14 @@ import com.apiNft.NFTAPI.entidades.Usuario;
 import com.apiNft.NFTAPI.services.UsuarioService;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.util.UriComponentsBuilder;
-
 import java.io.IOException;
 import java.net.URI;
 import java.util.List;
 import java.util.Map;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
 @RequestMapping("/api/users")
@@ -26,26 +25,27 @@ public class UsuarioController {
     private UsuarioService usuarioService;
 
     @GetMapping("/{id}")
-    public Usuario getUser(@PathVariable Long id){
+    public Usuario getUser(@PathVariable Long id) {
         Usuario user = usuarioService.getUser(id);
         return user;
     }
 
     @GetMapping("/nfts/{id}")
-    public ResponseEntity<List<Nft>> getAllNftsFromUser(@PathVariable Long id){
+    public ResponseEntity<List<Nft>> getAllNftsFromUser(@PathVariable Long id) {
         List<Nft> nfts = usuarioService.getAllNftsFromUser(id);
         return ResponseEntity.ok(nfts);
     }
 
     @PostMapping("/register")
-    public ResponseEntity<ResponseCadastroUsuario> postUser(@RequestBody @Valid RequestCadastroUsuario usuario, UriComponentsBuilder uriBuilder){
+    public ResponseEntity<ResponseCadastroUsuario> postUser(
+            @RequestBody @Valid RequestCadastroUsuario usuario, UriComponentsBuilder uriBuilder) {
         Usuario newUser = usuarioService.cadastraUsuario(usuario);
         URI uri = uriBuilder.path("/users/{id}").buildAndExpand(newUser.getId()).toUri();
         return ResponseEntity.created(uri).body(new ResponseCadastroUsuario(newUser));
     }
 
     @PostMapping("/login")
-    public ResponseEntity<Map<String, String>> logarUser(@RequestBody @Valid RequestLoginUsuario dadosLogin){
+    public ResponseEntity<Map<String, String>> logarUser(@RequestBody @Valid RequestLoginUsuario dadosLogin) {
         var token = usuarioService.logarUsuario(dadosLogin);
         return ResponseEntity.ok(Map.of("token", token));
     }
@@ -58,5 +58,4 @@ public class UsuarioController {
         System.out.println(jwtTokenOAuth);
         response.sendRedirect("http://localhost:4201?" + "token=" + tokenJWT);
     }
-
 }

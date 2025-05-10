@@ -2,12 +2,11 @@ package com.apiNft.NFTAPI.entidades;
 
 import com.apiNft.NFTAPI.dto.RequestCadastroUsuario;
 import jakarta.persistence.*;
+import java.util.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
-import java.util.*;
 
 @Builder
 @Table(name = "tb_usuarios")
@@ -54,11 +53,11 @@ public class Usuario implements UserDetails {
         List<SimpleGrantedAuthority> authorities = new ArrayList<>();
         authorities.add(new SimpleGrantedAuthority("USER"));
 
-        if(role.name().equals("SYSADMIN")){
+        if (role.name().equals("SYSADMIN")) {
             authorities.add(new SimpleGrantedAuthority("ADMIN"));
             authorities.add(new SimpleGrantedAuthority("SYSADMIN"));
         }
-        if(role.name().equals("ADMIN")){
+        if (role.name().equals("ADMIN")) {
             authorities.add(new SimpleGrantedAuthority("ADMIN"));
         }
 
@@ -94,5 +93,4 @@ public class Usuario implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
-
 }

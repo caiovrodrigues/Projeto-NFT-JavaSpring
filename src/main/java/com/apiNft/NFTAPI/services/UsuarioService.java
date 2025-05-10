@@ -10,6 +10,7 @@ import com.apiNft.NFTAPI.infra.security.JwtService;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import jakarta.persistence.EntityNotFoundException;
+import java.util.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -18,8 +19,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -31,7 +30,9 @@ public class UsuarioService {
     private final JwtService jwtService;
 
     public Usuario getUser(Long id) {
-        return usuarioRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Usuário com o id: " + id + " não encontrado."));
+        return usuarioRepository
+                .findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Usuário com o id: " + id + " não encontrado."));
     }
 
     public List<Nft> getAllNftsFromUser(Long id) {
@@ -41,7 +42,7 @@ public class UsuarioService {
 
     @Transactional
     public Usuario cadastraUsuario(RequestCadastroUsuario usuario) {
-        if(!usuario.getPassword().equals(usuario.getConfirmPassword())){
+        if (!usuario.getPassword().equals(usuario.getConfirmPassword())) {
             throw new InputMismatchException("Senha e confirma senha não conferem");
         }
         usuario.setPassword(new BCryptPasswordEncoder().encode(usuario.getPassword()));
@@ -50,14 +51,16 @@ public class UsuarioService {
 
     @Transactional(readOnly = true)
     public String logarUsuario(RequestLoginUsuario dados) {
-        Usuario user = usuarioRepository.findByUsername(dados.username())
-                .orElseThrow(() -> new EntityNotFoundException(String.format("User '%s' not found.", dados.username())));
+        Usuario user = usuarioRepository
+                .findByUsername(dados.username())
+                .orElseThrow(
+                        () -> new EntityNotFoundException(String.format("User '%s' not found.", dados.username())));
 
-        if(Objects.isNull(user)){
+        if (Objects.isNull(user)) {
             throw new InputMismatchException("O usuário não existe");
         }
 
-        if(!new BCryptPasswordEncoder().matches(dados.password(), user.getPassword())){
+        if (!new BCryptPasswordEncoder().matches(dados.password(), user.getPassword())) {
             throw new InputMismatchException("A senha está incorreta");
         }
 
@@ -67,8 +70,9 @@ public class UsuarioService {
         return jwtService.generateToken((Usuario) auth.getPrincipal());
     }
 
-    public Usuario findByUsername(String username){
-        return usuarioRepository.findByUsername(username)
+    public Usuario findByUsername(String username) {
+        return usuarioRepository
+                .findByUsername(username)
                 .orElseThrow(() -> new EntityNotFoundException("Usuário " + username + " não existe"));
     }
 
@@ -79,7 +83,8 @@ public class UsuarioService {
         Optional<Usuario> usuarioOpt = usuarioRepository.findByEmail(email);
 
         Usuario usuario = usuarioOpt.orElseGet(() -> {
-            Usuario userSaved = Usuario.builder().email(email).role(AppRole.USER).build();
+            Usuario userSaved =
+                    Usuario.builder().email(email).role(AppRole.USER).build();
             return usuarioRepository.save(userSaved);
         });
 
