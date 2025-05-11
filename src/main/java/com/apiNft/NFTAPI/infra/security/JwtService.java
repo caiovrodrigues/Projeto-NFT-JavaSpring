@@ -1,6 +1,6 @@
 package com.apiNft.NFTAPI.infra.security;
 
-import com.apiNft.NFTAPI.entidades.Usuario;
+import com.apiNft.NFTAPI.entity.Usuario;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import java.time.*;
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class JwtService {
 
-    @Value("{spring.security.secret}")
+    @Value("{spring.security.secret:123}")
     private String secret;
 
     public String generateToken(Usuario usuario) {

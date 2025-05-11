@@ -2,8 +2,8 @@ package com.apiNft.NFTAPI.services;
 
 import com.apiNft.NFTAPI.Repositories.NftRepository;
 import com.apiNft.NFTAPI.dto.RequestCadastroNft;
-import com.apiNft.NFTAPI.entidades.Nft;
-import com.apiNft.NFTAPI.entidades.Usuario;
+import com.apiNft.NFTAPI.entity.Nft;
+import com.apiNft.NFTAPI.entity.Usuario;
 import com.apiNft.NFTAPI.infra.security.JwtService;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;

@@ -2,16 +2,16 @@ package com.apiNft.NFTAPI.services;
 
 import com.apiNft.NFTAPI.Repositories.CommentRepository;
 import com.apiNft.NFTAPI.dto.RequestCommentDTO;
-import com.apiNft.NFTAPI.entidades.Comment;
-import com.apiNft.NFTAPI.entidades.Nft;
-import com.apiNft.NFTAPI.entidades.Usuario;
+import com.apiNft.NFTAPI.entity.Comment;
+import com.apiNft.NFTAPI.entity.Nft;
+import com.apiNft.NFTAPI.entity.Usuario;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-@Service
 @RequiredArgsConstructor
+@Service
 public class CommentService {
 
     private final CommentRepository repository;

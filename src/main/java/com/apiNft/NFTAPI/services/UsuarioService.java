@@ -3,9 +3,9 @@ package com.apiNft.NFTAPI.services;
 import com.apiNft.NFTAPI.Repositories.UsuarioRepository;
 import com.apiNft.NFTAPI.dto.RequestCadastroUsuario;
 import com.apiNft.NFTAPI.dto.RequestLoginUsuario;
-import com.apiNft.NFTAPI.entidades.AppRole;
-import com.apiNft.NFTAPI.entidades.Nft;
-import com.apiNft.NFTAPI.entidades.Usuario;
+import com.apiNft.NFTAPI.entity.AppRole;
+import com.apiNft.NFTAPI.entity.Nft;
+import com.apiNft.NFTAPI.entity.Usuario;
 import com.apiNft.NFTAPI.infra.security.JwtService;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.interfaces.DecodedJWT;
@@ -20,9 +20,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-@Service
 @RequiredArgsConstructor
 @Slf4j
+@Service
 public class UsuarioService {
 
     private final UsuarioRepository usuarioRepository;
