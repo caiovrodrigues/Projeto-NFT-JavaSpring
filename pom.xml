@@ -116,6 +116,10 @@
 						<pattern>com.apiNft.NFTAPI.dto.*</pattern>
 						<pattern>com.apiNft.NFTAPI.entity.*</pattern>
 					</classPatterns>
+					<excludeClasses>
+						<class>org.springframework.security.core.userdetails.UserDetails</class>
+						<class>java.io.Serializable</class>
+					</excludeClasses>
 					<outputKind>module</outputKind>
 				</configuration>
 			</plugin>
