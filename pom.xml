@@ -16,6 +16,7 @@
 	<properties>
 		<java.version>21</java.version>
 		<spotless.version>2.44.3</spotless.version>
+		<typescript-generator.version>3.2.1263</typescript-generator.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -94,6 +95,29 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+
+			<plugin>
+				<groupId>cz.habarta.typescript-generator</groupId>
+				<artifactId>typescript-generator-maven-plugin</artifactId>
+				<version>${typescript-generator.version}</version>
+				<executions>
+					<execution>
+						<id>generate</id>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<phase>process-classes</phase>
+					</execution>
+				</executions>
+				<configuration>
+					<jsonLibrary>jackson2</jsonLibrary>
+					<classPatterns>
+						<pattern>com.apiNft.NFTAPI.dto.*</pattern>
+						<pattern>com.apiNft.NFTAPI.entity.*</pattern>
+					</classPatterns>
+					<outputKind>module</outputKind>
+				</configuration>
 			</plugin>
 
 			<plugin>
