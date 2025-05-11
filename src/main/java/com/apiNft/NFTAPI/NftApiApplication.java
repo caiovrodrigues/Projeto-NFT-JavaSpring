@@ -3,6 +3,7 @@ package com.apiNft.NFTAPI;
 import com.apiNft.NFTAPI.Repositories.UsuarioRepository;
 import com.apiNft.NFTAPI.entity.Role;
 import com.apiNft.NFTAPI.entity.Usuario;
+import java.util.List;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -31,8 +32,14 @@ public class NftApiApplication implements CommandLineRunner {
                 .username("admin")
                 .password(passwordEncoder.encode("123"))
                 .email("admin@gmail.com")
+                .role(Role.ADMIN)
+                .build();
+        var user = Usuario.builder()
+                .username("user")
+                .password(passwordEncoder.encode("123"))
+                .email("user@gmail.com")
                 .role(Role.USER)
                 .build();
-        usuarioRepository.save(admin);
+        usuarioRepository.saveAll(List.of(user, admin));
     }
 }

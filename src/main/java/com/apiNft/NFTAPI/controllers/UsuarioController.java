@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -25,15 +26,16 @@ public class UsuarioController {
 
     private final UsuarioService usuarioService;
 
-    @RoleAdministrador
-    @GetMapping("/{id}")
-    public Usuario getUser(@PathVariable Long id) {
-        return usuarioService.getUser(id);
+    @PreAuthorize(value = "#username == authentication.name || hasAuthority('ADMIN')")
+    @GetMapping("/{username}")
+    public Usuario getUser(@PathVariable String username) {
+        return usuarioService.getUser(username);
     }
 
-    @GetMapping("/nfts/{id}")
-    public ResponseEntity<List<Nft>> getAllNftsFromUser(@PathVariable Long id) {
-        List<Nft> nfts = usuarioService.getAllNftsFromUser(id);
+    @RoleAdministrador
+    @GetMapping("/{username}/nfts")
+    public ResponseEntity<List<Nft>> getAllNftsFromUser(@PathVariable String username) {
+        List<Nft> nfts = usuarioService.getAllNftsFromUser(username);
         return ResponseEntity.ok(nfts);
     }
 

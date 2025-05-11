@@ -29,14 +29,18 @@ public class UsuarioService {
     private final JwtService jwtService;
     private final PasswordEncoder passwordEncoder;
 
-    public Usuario getUser(Long id) {
+    public Usuario getUser(String username) {
         return usuarioRepository
-                .findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Usuário com o id: " + id + " não encontrado."));
+                .findByUsername(username)
+                .orElseThrow(
+                        () -> new EntityNotFoundException("Usuário com o username: " + username + " não encontrado."));
     }
 
-    public List<Nft> getAllNftsFromUser(Long id) {
-        Usuario usuario = this.getUser(id);
+    public List<Nft> getAllNftsFromUser(String username) {
+        Usuario usuario = usuarioRepository
+                .findByUsername(username)
+                .orElseThrow(
+                        () -> new EntityNotFoundException("Usuário com o username: " + username + " não encontrado."));
         return usuario.getNfts();
     }
 
