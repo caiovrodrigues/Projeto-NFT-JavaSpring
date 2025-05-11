@@ -1,7 +1,5 @@
 package com.apiNft.NFTAPI.infra.security;
 
-import com.apiNft.NFTAPI.Repositories.UsuarioRepository;
-import jakarta.persistence.EntityNotFoundException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -18,7 +16,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 public class JwtFilter extends OncePerRequestFilter {
 
     private final JwtService jwtService;
-    private final UsuarioRepository usuarioRepository;
+    private final CustomUserDetailsService userDetailsService;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
@@ -30,11 +28,10 @@ public class JwtFilter extends OncePerRequestFilter {
 
             var username = jwtService.validateToken(token);
 
-            var subject = usuarioRepository
-                    .findByUsername(username)
-                    .orElseThrow(() -> new EntityNotFoundException(String.format("User '%s' not found.", username)));
+            var userDetails = userDetailsService.loadUserByUsername(username);
 
-            var usernamePassword = new UsernamePasswordAuthenticationToken(subject, null, subject.getAuthorities());
+            var usernamePassword =
+                    new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
 
             SecurityContextHolder.getContext().setAuthentication(usernamePassword);
         }

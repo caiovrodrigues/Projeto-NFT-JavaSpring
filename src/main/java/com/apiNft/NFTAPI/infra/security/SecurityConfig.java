@@ -1,9 +1,7 @@
 package com.apiNft.NFTAPI.infra.security;
 
-import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
@@ -32,19 +30,8 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers(HttpMethod.POST, "/api/users/login")
-                        .permitAll()
-                        .requestMatchers(HttpMethod.POST, "/api/users/register")
-                        .permitAll()
-                        .requestMatchers(HttpMethod.GET, "api/nft", "api/nft/*", "api/comments/nft/*")
-                        .permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/relatorio")
-                        .permitAll()
-                        .requestMatchers(PathRequest.toH2Console())
-                        .permitAll()
-                        .anyRequest()
-                        .permitAll())
+                .authorizeHttpRequests(
+                        authorize -> authorize.requestMatchers("/**").permitAll())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
                 .headers(headers -> headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin))

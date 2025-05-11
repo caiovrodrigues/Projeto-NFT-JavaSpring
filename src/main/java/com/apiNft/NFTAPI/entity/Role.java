@@ -1,6 +1,6 @@
 package com.apiNft.NFTAPI.entity;
 
-public enum AppRole {
+public enum Role {
     USER,
     ADMIN,
     SYSADMIN

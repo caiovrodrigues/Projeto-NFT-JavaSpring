@@ -1,5 +1,6 @@
 package com.apiNft.NFTAPI.dto;
 
+import com.apiNft.NFTAPI.entity.Usuario;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -24,4 +25,12 @@ public class RequestCadastroUsuario {
 
     @NotBlank(message = "confirma senha não deve estar em branco")
     private String confirmPassword;
+
+    public Usuario toEntity() {
+        return Usuario.builder()
+                .email(email)
+                .username(username)
+                .password(password)
+                .build();
+    }
 }

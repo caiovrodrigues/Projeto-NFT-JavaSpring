@@ -5,6 +5,7 @@ import com.apiNft.NFTAPI.dto.RequestLoginUsuario;
 import com.apiNft.NFTAPI.dto.ResponseCadastroUsuario;
 import com.apiNft.NFTAPI.entity.Nft;
 import com.apiNft.NFTAPI.entity.Usuario;
+import com.apiNft.NFTAPI.infra.security.RoleAdministrador;
 import com.apiNft.NFTAPI.services.UsuarioService;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
@@ -24,6 +25,7 @@ public class UsuarioController {
 
     private final UsuarioService usuarioService;
 
+    @RoleAdministrador
     @GetMapping("/{id}")
     public Usuario getUser(@PathVariable Long id) {
         return usuarioService.getUser(id);

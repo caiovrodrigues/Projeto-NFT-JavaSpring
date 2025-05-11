@@ -42,8 +42,8 @@ class UsuarioRepositoryTests {
         assertThat(byUsername.isEmpty()).isTrue();
     }
 
-    Usuario createUsuario(RequestCadastroUsuario requestDTO) {
-        Usuario usuario = new Usuario(requestDTO);
+    Usuario createUsuario(RequestCadastroUsuario usuarioInput) {
+        var usuario = usuarioInput.toEntity();
         this.entityManager.persist(usuario);
         return usuario;
     }

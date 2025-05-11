@@ -1,4 +1,4 @@
-package com.apiNft.NFTAPI.infra.security.config;
+package com.apiNft.NFTAPI.infra.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

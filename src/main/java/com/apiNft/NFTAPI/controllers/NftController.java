@@ -14,15 +14,18 @@ import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.util.UriComponentsBuilder;
 
+@Slf4j
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/nft")
@@ -41,7 +44,8 @@ public class NftController {
     }
 
     @GetMapping // Retorna todos os nfts
-    public ResponseEntity<Page<Nft>> findAll(@PageableDefault(size = 9) Pageable pageable) {
+    public ResponseEntity<Page<Nft>> findAll(
+            Authentication authentication, @PageableDefault(size = 9) Pageable pageable) {
         Page<Nft> nfts = nftService.getAll(pageable);
         return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(nfts);
     }

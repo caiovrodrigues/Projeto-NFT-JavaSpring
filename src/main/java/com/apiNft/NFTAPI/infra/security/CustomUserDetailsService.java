@@ -3,7 +3,6 @@ package com.apiNft.NFTAPI.infra.security;
 import com.apiNft.NFTAPI.Repositories.UsuarioRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -15,9 +14,10 @@ public class CustomUserDetailsService implements UserDetailsService {
     private final UsuarioRepository repository;
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public CustomUserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return repository
                 .findByUsername(username)
+                .map(CustomUserDetails::new)
                 .orElseThrow(() -> new EntityNotFoundException(String.format("User '%s' not found.", username)));
     }
 }
