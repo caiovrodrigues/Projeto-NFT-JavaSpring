@@ -1,6 +1,6 @@
-package com.apiNft.NFTAPI.Repositories;
+package com.apiNft.NFTAPI.domain.repositories;
 
-import com.apiNft.NFTAPI.entity.Usuario;
+import com.apiNft.NFTAPI.domain.entity.Usuario;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

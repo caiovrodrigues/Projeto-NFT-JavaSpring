@@ -1,10 +1,10 @@
-package com.apiNft.NFTAPI.controllers;
+package com.apiNft.NFTAPI.web.controllers;
 
-import com.apiNft.NFTAPI.dto.RequestCadastroUsuario;
-import com.apiNft.NFTAPI.dto.RequestLoginUsuario;
-import com.apiNft.NFTAPI.dto.ResponseCadastroUsuario;
-import com.apiNft.NFTAPI.entity.Nft;
-import com.apiNft.NFTAPI.entity.Usuario;
+import com.apiNft.NFTAPI.web.dto.RequestCadastroUsuario;
+import com.apiNft.NFTAPI.web.dto.RequestLoginUsuario;
+import com.apiNft.NFTAPI.web.dto.ResponseCadastroUsuario;
+import com.apiNft.NFTAPI.domain.entity.Nft;
+import com.apiNft.NFTAPI.domain.entity.Usuario;
 import com.apiNft.NFTAPI.infra.security.RoleAdministrador;
 import com.apiNft.NFTAPI.services.UsuarioService;
 import jakarta.servlet.http.HttpServletResponse;
@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.util.List;
 import java.util.Map;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;

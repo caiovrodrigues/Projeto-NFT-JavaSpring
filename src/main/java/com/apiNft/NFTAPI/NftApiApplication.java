@@ -1,9 +1,11 @@
 package com.apiNft.NFTAPI;
 
-import com.apiNft.NFTAPI.Repositories.UsuarioRepository;
-import com.apiNft.NFTAPI.entity.Role;
-import com.apiNft.NFTAPI.entity.Usuario;
+import com.apiNft.NFTAPI.domain.repositories.UsuarioRepository;
+import com.apiNft.NFTAPI.domain.entity.Role;
+import com.apiNft.NFTAPI.domain.entity.Usuario;
+
 import java.util.List;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

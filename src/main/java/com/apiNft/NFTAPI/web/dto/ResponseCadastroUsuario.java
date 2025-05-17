@@ -1,6 +1,6 @@
-package com.apiNft.NFTAPI.dto;
+package com.apiNft.NFTAPI.web.dto;
 
-import com.apiNft.NFTAPI.entity.Usuario;
+import com.apiNft.NFTAPI.domain.entity.Usuario;
 
 public record ResponseCadastroUsuario(Long id, String email, String username, String password) {
     public ResponseCadastroUsuario(Usuario newUser) {

@@ -1,6 +1,6 @@
 package com.apiNft.NFTAPI.infra.security;
 
-import com.apiNft.NFTAPI.Repositories.UsuarioRepository;
+import com.apiNft.NFTAPI.domain.repositories.UsuarioRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetailsService;

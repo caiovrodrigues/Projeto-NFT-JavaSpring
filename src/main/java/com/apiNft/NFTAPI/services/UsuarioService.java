@@ -1,11 +1,11 @@
 package com.apiNft.NFTAPI.services;
 
-import com.apiNft.NFTAPI.Repositories.UsuarioRepository;
-import com.apiNft.NFTAPI.dto.RequestCadastroUsuario;
-import com.apiNft.NFTAPI.dto.RequestLoginUsuario;
-import com.apiNft.NFTAPI.entity.Nft;
-import com.apiNft.NFTAPI.entity.Role;
-import com.apiNft.NFTAPI.entity.Usuario;
+import com.apiNft.NFTAPI.domain.repositories.UsuarioRepository;
+import com.apiNft.NFTAPI.web.dto.RequestCadastroUsuario;
+import com.apiNft.NFTAPI.web.dto.RequestLoginUsuario;
+import com.apiNft.NFTAPI.domain.entity.Nft;
+import com.apiNft.NFTAPI.domain.entity.Role;
+import com.apiNft.NFTAPI.domain.entity.Usuario;
 import com.apiNft.NFTAPI.infra.security.JwtService;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.interfaces.DecodedJWT;

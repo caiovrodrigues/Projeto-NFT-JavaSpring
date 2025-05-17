@@ -1,5 +1,6 @@
-package com.apiNft.NFTAPI.services;
+package com.apiNft.NFTAPI.web.controllers;
 
+import com.apiNft.NFTAPI.services.JasperService;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import org.springframework.http.MediaType;

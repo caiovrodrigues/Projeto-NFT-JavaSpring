@@ -23,15 +23,7 @@ public class MinioService {
                             .contentType(file.getContentType())
                             .object(urlMinio)
                             .build());
-        } catch (ErrorResponseException
-                | InsufficientDataException
-                | InternalException
-                | InvalidKeyException
-                | InvalidResponseException
-                | IOException
-                | NoSuchAlgorithmException
-                | XmlParserException
-                | ServerException e) {
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }

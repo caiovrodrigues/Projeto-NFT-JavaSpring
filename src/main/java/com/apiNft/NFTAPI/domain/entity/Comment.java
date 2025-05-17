@@ -1,4 +1,4 @@
-package com.apiNft.NFTAPI.entity;
+package com.apiNft.NFTAPI.domain.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;

@@ -1,4 +1,4 @@
-package com.apiNft.NFTAPI.dto;
+package com.apiNft.NFTAPI.web.dto;
 
 import jakarta.validation.constraints.NotBlank;
 

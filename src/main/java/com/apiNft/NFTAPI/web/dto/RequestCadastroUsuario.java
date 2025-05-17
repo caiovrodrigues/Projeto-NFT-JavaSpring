@@ -1,6 +1,6 @@
-package com.apiNft.NFTAPI.dto;
+package com.apiNft.NFTAPI.web.dto;
 
-import com.apiNft.NFTAPI.entity.Usuario;
+import com.apiNft.NFTAPI.domain.entity.Usuario;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;

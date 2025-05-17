@@ -1,9 +1,9 @@
 package com.apiNft.NFTAPI.services;
 
-import com.apiNft.NFTAPI.Repositories.NftRepository;
-import com.apiNft.NFTAPI.dto.RequestCadastroNft;
-import com.apiNft.NFTAPI.entity.Nft;
-import com.apiNft.NFTAPI.entity.Usuario;
+import com.apiNft.NFTAPI.domain.repositories.NftRepository;
+import com.apiNft.NFTAPI.web.dto.RequestCadastroNft;
+import com.apiNft.NFTAPI.domain.entity.Nft;
+import com.apiNft.NFTAPI.domain.entity.Usuario;
 import com.apiNft.NFTAPI.infra.security.JwtService;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -58,7 +58,6 @@ public class NftService {
     }
 
     public void delete(Long id) {
-        getById(id);
         this.repository.deleteById(id);
     }
 }

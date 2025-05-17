@@ -1,10 +1,10 @@
-package com.apiNft.NFTAPI.controllers;
+package com.apiNft.NFTAPI.web.controllers;
 
-import com.apiNft.NFTAPI.dto.RequestCommentDTO;
-import com.apiNft.NFTAPI.dto.ResponseComentarioNftDTO;
-import com.apiNft.NFTAPI.entity.Comment;
-import com.apiNft.NFTAPI.entity.Nft;
-import com.apiNft.NFTAPI.entity.Usuario;
+import com.apiNft.NFTAPI.web.dto.RequestCommentDTO;
+import com.apiNft.NFTAPI.web.dto.ResponseComentarioNftDTO;
+import com.apiNft.NFTAPI.domain.entity.Comment;
+import com.apiNft.NFTAPI.domain.entity.Nft;
+import com.apiNft.NFTAPI.domain.entity.Usuario;
 import com.apiNft.NFTAPI.infra.security.JwtService;
 import com.apiNft.NFTAPI.services.CommentService;
 import com.apiNft.NFTAPI.services.NftService;

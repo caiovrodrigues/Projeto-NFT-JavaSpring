@@ -1,6 +1,6 @@
 package com.apiNft.NFTAPI.infra.security;
 
-import com.apiNft.NFTAPI.entity.Usuario;
+import com.apiNft.NFTAPI.domain.entity.Usuario;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;

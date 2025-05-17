@@ -1,6 +1,6 @@
-package com.apiNft.NFTAPI.dto;
+package com.apiNft.NFTAPI.web.dto;
 
-import com.apiNft.NFTAPI.entity.Nft;
+import com.apiNft.NFTAPI.domain.entity.Nft;
 
 public record ResponseNftDTO(
         Long id,

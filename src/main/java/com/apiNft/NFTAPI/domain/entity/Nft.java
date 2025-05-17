@@ -1,6 +1,6 @@
-package com.apiNft.NFTAPI.entity;
+package com.apiNft.NFTAPI.domain.entity;
 
-import com.apiNft.NFTAPI.dto.RequestCadastroNft;
+import com.apiNft.NFTAPI.web.dto.RequestCadastroNft;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;

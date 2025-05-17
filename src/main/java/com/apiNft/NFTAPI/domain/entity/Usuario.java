@@ -1,4 +1,4 @@
-package com.apiNft.NFTAPI.entity;
+package com.apiNft.NFTAPI.domain.entity;
 
 import jakarta.persistence.*;
 import java.util.*;
